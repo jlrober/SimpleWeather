@@ -1,0 +1,71 @@
+{
+  "root": "apps/nxtest",
+  "sourceRoot": "apps/nxtest/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/web:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/api/public",
+        "index": "apps/nxtest/src/index.html",
+        "baseHref": "/",
+        "main": "apps/nxtest/src/main.tsx",
+        "polyfills": "apps/nxtest/src/polyfills.ts",
+        "tsConfig": "apps/nxtest/tsconfig.app.json",
+        "assets": ["apps/nxtest/src/favicon.ico", "apps/nxtest/src/assets"],
+        "styles": ["apps/nxtest/src/styles.css"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/nxtest/src/environments/environment.ts",
+              "with": "apps/nxtest/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/web:dev-server",
+      "options": {
+        "buildTarget": "nxtest:build",
+        "hmr": true,
+        "proxyConfig": "apps/nxtest/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "nxtest:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nxtest/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/nxtest"],
+      "options": {
+        "jestConfig": "apps/nxtest/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
