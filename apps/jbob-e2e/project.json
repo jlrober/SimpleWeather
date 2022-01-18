@@ -1,0 +1,28 @@
+{
+   "root": "apps/jbob-e2e",
+   "sourceRoot": "apps/jbob-e2e/src",
+   "projectType": "application",
+   "targets": {
+      "e2e": {
+         "executor": "@nrwl/cypress:cypress",
+         "options": {
+            "cypressConfig": "apps/jbob-e2e/cypress.json",
+            "devServerTarget": "jbob:serve"
+         },
+         "configurations": {
+            "production": {
+               "devServerTarget": "jbob:serve:production"
+            }
+         }
+      },
+      "lint": {
+         "executor": "@nrwl/linter:eslint",
+         "outputs": ["{options.outputFile}"],
+         "options": {
+            "lintFilePatterns": ["apps/jbob-e2e/**/*.{js,ts}"]
+         }
+      }
+   },
+   "tags": [],
+   "implicitDependencies": ["jbob"]
+}

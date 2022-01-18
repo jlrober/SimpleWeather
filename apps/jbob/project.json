@@ -1,0 +1,70 @@
+{
+   "root": "apps/jbob",
+   "sourceRoot": "apps/jbob/src",
+   "projectType": "application",
+   "targets": {
+      "build": {
+         "executor": "@nrwl/web:webpack",
+         "outputs": ["{options.outputPath}"],
+         "defaultConfiguration": "production",
+         "options": {
+            "compiler": "babel",
+            "outputPath": "dist/apps/api/public",
+            "index": "apps/jbob/src/index.html",
+            "baseHref": "/",
+            "main": "apps/jbob/src/main.tsx",
+            "polyfills": "apps/jbob/src/polyfills.ts",
+            "tsConfig": "apps/jbob/tsconfig.app.json",
+            "assets": ["apps/jbob/src/favicon.ico", "apps/jbob/src/assets"],
+            "styles": ["apps/jbob/src/styles.css"],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/webpack"
+         },
+         "configurations": {
+            "production": {
+               "fileReplacements": [
+                  {
+                     "replace": "apps/jbob/src/environments/environment.ts",
+                     "with": "apps/jbob/src/environments/environment.prod.ts"
+                  }
+               ],
+               "optimization": true,
+               "outputHashing": "all",
+               "sourceMap": false,
+               "namedChunks": false,
+               "extractLicenses": true,
+               "vendorChunk": false
+            }
+         }
+      },
+      "serve": {
+         "executor": "@nrwl/web:dev-server",
+         "options": {
+            "buildTarget": "jbob:build",
+            "hmr": true
+         },
+         "configurations": {
+            "production": {
+               "buildTarget": "jbob:build:production",
+               "hmr": false
+            }
+         }
+      },
+      "lint": {
+         "executor": "@nrwl/linter:eslint",
+         "outputs": ["{options.outputFile}"],
+         "options": {
+            "lintFilePatterns": ["apps/jbob/**/*.{ts,tsx,js,jsx}"]
+         }
+      },
+      "test": {
+         "executor": "@nrwl/jest:jest",
+         "outputs": ["coverage/apps/jbob"],
+         "options": {
+            "jestConfig": "apps/jbob/jest.config.js",
+            "passWithNoTests": true
+         }
+      }
+   },
+   "tags": []
+}

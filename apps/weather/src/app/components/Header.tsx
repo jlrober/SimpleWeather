@@ -10,8 +10,8 @@ const Header = (props: { themeMode: PaletteMode, setThemeMode: (themeMode: Palet
 	const { themeMode, setThemeMode } = props;
   
     return <AppBar position="static">
-    <Toolbar variant="dense">
-      <IconButton
+    <Toolbar variant="dense" sx={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
+      {/* <IconButton
         size="large"
         edge="start"
         color="inherit"
@@ -19,7 +19,7 @@ const Header = (props: { themeMode: PaletteMode, setThemeMode: (themeMode: Palet
         sx={{ mr: 2 }}
       >
         <MenuIcon />
-      </IconButton>
+      </IconButton> */}
       <Typography variant="h6" color="inherit" component="div" sx={{ flexGrow: 1 }}>
         SimpleWeather
       </Typography>

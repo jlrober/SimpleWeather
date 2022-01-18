@@ -1,9 +1,11 @@
 {
-  "version": 2,
-  "projects": {
-    "api": "apps/api",
-    "data": "libs/data",
-    "nxtest": "apps/nxtest",
-    "nxtest-e2e": "apps/nxtest-e2e"
-  }
+   "version": 2,
+   "projects": {
+      "api": "apps/api",
+      "data": "libs/data",
+      "jbob": "apps/jbob",
+      "jbob-e2e": "apps/jbob-e2e",
+      "weather": "apps/weather",
+      "weather-e2e": "apps/weather-e2e"
+   }
 }

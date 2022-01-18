@@ -1,4 +1,4 @@
-import { DayWeatherData, Weather } from '@nxtest/data';
+import { DayWeatherData } from '@nxtest/data';
 import React, { Fragment } from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -75,7 +75,7 @@ const mapWeatherKeyToLabel: mapWeatherKeyToLabelType = {
 
 const valuesToFilter = ['dt', 'sunrise', 'sunset', 'weather']
 
-const CurrentListItem = (props: { itemKey: string, value: number|Weather[] }) => {
+const CurrentListItem = (props: { itemKey: string, value: DayWeatherData["index"] }) => {
 	const { itemKey, value } = props;
 	const { label, formatValue = null} = mapWeatherKeyToLabel[itemKey];
 	const formattedValue = formatValue && typeof value === 'number' ? formatValue(value) : value;
@@ -87,12 +87,14 @@ const CurrentListItem = (props: { itemKey: string, value: number|Weather[] }) =>
 
 const CurrentWeather = (props: { data: DayWeatherData }) => {
 	const { data } = props;
+	console.log(data);
 	const listItems = Object.keys(data)
+		.filter(itemKey => !!mapWeatherKeyToLabel[itemKey])
 		.filter(itemKey => !valuesToFilter.find(filterItem => filterItem === itemKey))
-		.map(itemKey => <><CurrentListItem itemKey={itemKey} value={data[itemKey]} /><Divider /></>)
+		.map(itemKey => <><Divider /><CurrentListItem itemKey={itemKey} value={data[itemKey]} /></>)
 
 	return (
-		<Box sx={{ width: '100%', maxWidth: 360, margin: '12px' }}>
+		<Box sx={{ minWidth: '360px', flexGrow: '1' }}>
 			<Card sx={{ minWidth: 275, bgcolor: 'background.paper' }}>
 				<CardContent>
 					<Typography variant='h4' sx={{ textAlign: 'center' }}>Current</Typography>

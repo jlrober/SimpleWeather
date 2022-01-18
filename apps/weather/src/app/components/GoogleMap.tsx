@@ -4,7 +4,7 @@ import axios from 'axios';
 
 type GoogleMapProps = {
 	coords: google.maps.LatLngLiteral,
-	setHeading: (heading: string) => void
+	setHeading?: (heading: string) => void
 }
 
 const GoogleMap = (props: GoogleMapProps) => {
@@ -45,18 +45,19 @@ const GoogleMap = (props: GoogleMapProps) => {
 				});
 
 				map.overlayMapTypes.insertAt(0, layer);
+				if (setHeading) {
+					const buildHeading = (locationData: google.maps.GeocoderResponse) => {
+						const addressComponents = locationData.results[0].address_components;
 
-				const buildHeading = (locationData: google.maps.GeocoderResponse) => {
-					const addressComponents = locationData.results[0].address_components;
+						return `${addressComponents[3].long_name}, ${addressComponents[5].long_name}`
+					}
 
-					return `${addressComponents[3].long_name}, ${addressComponents[5].long_name}`
+					const geocoder = new google.maps.Geocoder();
+					geocoder
+						.geocode({ location: coords })
+						.then((response) => {  setHeading(buildHeading(response)) })
+						.catch(err => console.error(err));
 				}
-
-				const geocoder = new google.maps.Geocoder();
-				geocoder
-					.geocode({ location: coords })
-					.then((response) => {  setHeading(buildHeading(response)) })
-					.catch(err => console.error(err));
 			});
 		}
 	}, [googleKey]);

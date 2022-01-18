@@ -1,6 +1,6 @@
 {
-  "root": "apps/nxtest",
-  "sourceRoot": "apps/nxtest/src",
+  "root": "apps/weather",
+  "sourceRoot": "apps/weather/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,14 +9,14 @@
       "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/api/public",
-        "index": "apps/nxtest/src/index.html",
-        "baseHref": "/",
-        "main": "apps/nxtest/src/main.tsx",
-        "polyfills": "apps/nxtest/src/polyfills.ts",
-        "tsConfig": "apps/nxtest/tsconfig.app.json",
-        "assets": ["apps/nxtest/src/favicon.ico", "apps/nxtest/src/assets"],
-        "styles": ["apps/nxtest/src/styles.css"],
+        "outputPath": "dist/apps/api/public/weather",
+        "index": "apps/weather/src/index.html",
+        "baseHref": "/weather/",
+        "main": "apps/weather/src/main.tsx",
+        "polyfills": "apps/weather/src/polyfills.ts",
+        "tsConfig": "apps/weather/tsconfig.app.json",
+        "assets": ["apps/weather/src/favicon.ico", "apps/weather/src/assets"],
+        "styles": ["apps/weather/src/styles.css"],
         "scripts": [],
         "webpackConfig": "@nrwl/react/plugins/webpack"
       },
@@ -24,8 +24,8 @@
         "production": {
           "fileReplacements": [
             {
-              "replace": "apps/nxtest/src/environments/environment.ts",
-              "with": "apps/nxtest/src/environments/environment.prod.ts"
+              "replace": "apps/weather/src/environments/environment.ts",
+              "with": "apps/weather/src/environments/environment.prod.ts"
             }
           ],
           "optimization": true,
@@ -40,13 +40,13 @@
     "serve": {
       "executor": "@nrwl/web:dev-server",
       "options": {
-        "buildTarget": "nxtest:build",
+        "buildTarget": "weather:build",
         "hmr": true,
-        "proxyConfig": "apps/nxtest/proxy.conf.json"
+        "proxyConfig": "apps/weather/proxy.conf.json"
       },
       "configurations": {
         "production": {
-          "buildTarget": "nxtest:build:production",
+          "buildTarget": "weather:build:production",
           "hmr": false
         }
       }
@@ -55,14 +55,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/nxtest/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": ["apps/weather/**/*.{ts,tsx,js,jsx}"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/nxtest"],
+      "outputs": ["coverage/apps/weather"],
       "options": {
-        "jestConfig": "apps/nxtest/jest.config.js",
+        "jestConfig": "apps/weather/jest.config.js",
         "passWithNoTests": true
       }
     }
